@@ -1,59 +1,134 @@
-import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import DatePicker from "react-date-picker";
-import { Form } from "react-bootstrap";
-import axios from "axios";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import logo from "../images/leh-ladakh-495x330.jpg";
+import goa from "../images/goa.jpg";
+import rajasthan from "../images/Rajasthan.jpg";
+import northEast from "../images/NorthEast.jpg";
+import { useNavigate } from "react-router-dom";
 const HomeScreen = () => {
-  const [flight, setFlight] = useState({});
-
-  const [to, setTo] = useState("");
-  const [from, setFrom] = useState("");
-  const [date, setDate] = useState("");
-  const url = `http://localhost:5000/flights?dep_iata=${from}&arr_iata=${to}&arr_scheduled_time_dep=2021-12-3`;
-  async function fetchData() {
-    await axios
-      .get(url)
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log("Error"));
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFrom(e.target[0].value);
-    setTo(e.target[1].value);
-    setDate(e.target[2].value);
-    console.log(to);
-    console.log(e.target);
-    fetchData();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onClickHandler = () => {
+    navigate("/flight");
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={to}
-          onChange={(e) => setTo(e.target.to)}
-          placeholder="To"
-          type="text"
-          required
-        ></input>
-        <input
-          value={from}
-          onChange={(e) => setFrom(e.target.from)}
-          placeholder="From"
-          type="text"
-          required
-        ></input>
-        <input
-          value={date}
-          onChange={(e) => setDate(e.target.date)}
-          placeholder="Date"
-          type="date"
-          required
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <div className=" justify-center items-center min-h-screen  dark:bg-gray-900 ">
+      <div className="flex flex-col  justify-items-center items-center ">
+        <h1 className="font-sans my-4  font-bold tracking-wide leading-loose text-white text-4xl">
+          Take Some Workations
+        </h1>
+      </div>
+      <div className="flex flex-col item-center justify-center p-4">
+        <div className="flex flex-row item-center justify-center ">
+          <div className="bg-white  flex item-center justify-center mx-10 rounded-lg mb-10">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col ">
+              <img src={logo} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                Ladakh
+              </header>
+              <div className="p-8">
+                <p className="">The warmest place on earth</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white  font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white  flex item-center justify-center mx-10 rounded-lg mb-10">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col ">
+              <img src={goa} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                Goa
+              </header>
+              <div className="p-8">
+                <p className="">The warmest place on earth</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white  font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white flex item-center justify-center mx-10 rounded-lg mb-10">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col">
+              <img src={northEast} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                North East
+              </header>
+              <div className="p-8">
+                <p className="">The warmest place on earth</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row item-center justify-center ">
+          <div className="bg-white  flex item-center justify-center mx-10 rounded-lg">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col ">
+              <img src={logo} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                Manali
+              </header>
+              <div className="p-8">
+                <p className="">The warmest place on earth</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white flex item-center justify-center mx-10 rounded-lg">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col">
+              <img src={logo} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                Kerala
+              </header>
+              <div className="p-8">
+                <p className="">The warmest place on earth</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white flex item-center justify-center mx-10 rounded-lg">
+            <div className="bg-white rounded-lg shadow-2xl flex flex-col">
+              <img src={rajasthan} className="rounded-t-lg object-cover" />
+              <header className="bg-gray-200 rounded-t-lg py-3 px-8 text-xl font-extrabold">
+                Rajasthan
+              </header>
+              <div className="p-8">
+                <p className="">Padharo Mahre Des</p>
+                <button
+                  onClick={onClickHandler}
+                  className="bg-blue-400 w-40 rounded-lg py-4 px-4 mt-5 hover:text-white font-extrabold"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
