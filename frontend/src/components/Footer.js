@@ -2,13 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
-      <Container>
-        <Row>
-          <Col className="text-center py-6">Copyright &copy; BIAL</Col>
-        </Row>
-      </Container>
-    </footer>
+    <>
+      <div className="flex fixed bottom-0 w-full h-24 bg-gray-900 justify-center items-center">
+        <div className="text-white">Copyright &copy; Travellers</div>
+      </div>
+    </>
   );
 };
 

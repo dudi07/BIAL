@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import onClickOutside from "react-onclickoutside";
+
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAction } from "../actions/userActions";
-import { Link } from "react-router-dom";
-import Avatar from "react-avatar";
+
 const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -13,6 +13,10 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logoutAction());
   };
+  const toggle = () => setIsOpen(!isOpen);
+
+  Header.handleClickOutside = () => setIsOpen(false);
+
   useEffect(() => {
     console.log(isOpen);
   }, [isOpen]);
@@ -58,18 +62,21 @@ const Header = () => {
               <a
                 href="/flight"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-4"
+                onClick={toggle}
               >
                 Flight
               </a>
               <a
                 href="/cab_booking"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-4"
+                onClick={toggle}
               >
                 Cab
               </a>
               <a
                 href="/explore"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-4"
+                onClick={toggle}
               >
                 Explore
               </a>
@@ -101,7 +108,7 @@ const Header = () => {
                 </button>
                 <div className="ml-3 relative">
                   <div>
-                    {userInfo == null ? (
+                    {userInfo === null ? (
                       <a href="/register" className="mx-3">
                         Signup
                       </a>
@@ -125,7 +132,7 @@ const Header = () => {
 
                   <div
                     className={
-                      isOpen == true
+                      isOpen === false
                         ? "hidden"
                         : "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                     }
@@ -173,6 +180,9 @@ const Header = () => {
       </div>
     </>
   );
+};
+const clickOutsideConfig = {
+  handleClickOutside: () => Header.handleClickOutside,
 };
 
 export default Header;
